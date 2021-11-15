@@ -1,10 +1,10 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import cors from 'cors';
 import config from 'config';
 import logger from './utils/logger';
 import { version } from '../package.json';
+import sockets from './socket';
 
 const port = config.get<number>('port');
 const host = config.get<string>('host');
@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
     return res.send('<h1>Server is running</h1>');
 });
 
- httpServer.listen(port, host, () => {
-     logger.info(`Server is listening on port ${port}, version: ${version}`);
- })
+httpServer.listen(port, host, () => {
+    logger.info(`Server is listening on port ${port}, version: ${version}`);
+    sockets({io});
+ });
 

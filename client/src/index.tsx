@@ -1,10 +1,12 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import SocketProvider from './context/socket.context';
 
 ReactDOM.render(
-    <App />,
+  <SocketProvider>
+    <App />
+  </SocketProvider>,
   document.getElementById('root')
 );
 
